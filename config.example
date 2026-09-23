@@ -1,0 +1,29 @@
+# frost config: copy to ~/.config/frost/config
+# Lines starting with # are comments. Every option is optional.
+
+[general]
+# Mode frost opens in: rect, free, window, or last (whatever you used last time)
+mode = last
+
+# Where shots are saved. ~ and $VARS are expanded.
+# Default: $XDG_PICTURES_DIR/Screenshots
+# directory = ~/Pictures/Screenshots
+
+save = true
+clipboard = true
+notify = true
+
+# Colour of the frozen-screen border, selection outline and active tab
+accent = #e5b84a
+
+[keys]
+# Space-separated xkb key names, matched by what your layout produces, so
+# they follow AZERTY/QWERTZ/Dvorak/... automatically. Letters are
+# case-insensitive. For the digit row, 1-4 also work without Shift on AZERTY.
+# Names: https://xkbcommon.org/doc/current/xkbcommon-keysyms_8h.html
+# (drop the XKB_KEY_ prefix: Return, Escape, space, F1, KP_Enter, ...)
+rect   = r 1
+free   = f 2
+window = w 3
+screen = s 4 Return KP_Enter
+cancel = Escape
