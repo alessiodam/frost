@@ -1,0 +1,44 @@
+# Maintainer: Alessio D'Ambrosio <alessio at alessiodam dot dev>
+
+pkgname=frost-sway
+pkgver=0.1.0
+pkgrel=1
+pkgdesc='Freeze-frame screenshots and screen recording for sway'
+arch=('x86_64' 'aarch64')
+url='https://github.com/alessiodam/frost'
+license=('GPL-3.0-only')
+depends=('glibc' 'libxkbcommon' 'grim' 'sway' 'wl-clipboard' 'fontconfig')
+makedepends=('go' 'git')
+optdepends=(
+  'ffmpeg: screen recording'
+  'libpulse: choosing named audio sources when recording'
+  'libnotify: notifications after taking a screenshot'
+  'xdg-utils: open the screenshot by clicking the notification'
+  'xdg-user-dirs: save to the localized Pictures folder'
+  'ttf-jetbrains-mono-nerd: toolbar icons'
+)
+source=("frost::git+$url.git#tag=v$pkgver")
+sha256sums=("SKIP")
+
+prepare() {
+  cd frost
+  export GOPATH="$srcdir/gopath"
+  go mod download -modcacherw
+}
+
+build() {
+  cd frost
+  export GOPATH="$srcdir/gopath"
+  export CGO_CPPFLAGS="$CPPFLAGS"
+  export CGO_CFLAGS="$CFLAGS"
+  export CGO_CXXFLAGS="$CXXFLAGS"
+  export CGO_LDFLAGS="$LDFLAGS"
+  export GOFLAGS="-buildmode=pie -trimpath -ldflags=-linkmode=external -mod=readonly -modcacherw"
+  go build -o frost .
+}
+
+package() {
+  cd frost
+  install -Dm755 frost -t "$pkgdir/usr/bin/"
+  install -Dm644 README.md config.example -t "$pkgdir/usr/share/doc/$pkgname/"
+}

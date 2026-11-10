@@ -1,0 +1,26 @@
+pkgbase = frost-sway
+	pkgdesc = Freeze-frame screenshots and screen recording for sway
+	pkgver = 0.1.0
+	pkgrel = 1
+	url = https://github.com/alessiodam/frost
+	arch = x86_64
+	arch = aarch64
+	license = GPL-3.0-only
+	makedepends = go
+	makedepends = git
+	depends = glibc
+	depends = libxkbcommon
+	depends = grim
+	depends = sway
+	depends = wl-clipboard
+	depends = fontconfig
+	optdepends = ffmpeg: screen recording
+	optdepends = libpulse: choosing named audio sources when recording
+	optdepends = libnotify: notifications after taking a screenshot
+	optdepends = xdg-utils: open the screenshot by clicking the notification
+	optdepends = xdg-user-dirs: save to the localized Pictures folder
+	optdepends = ttf-jetbrains-mono-nerd: toolbar icons
+	source = frost::git+https://github.com/alessiodam/frost.git#tag=v0.1.0
+	sha256sums = SKIP
+
+pkgname = frost-sway
